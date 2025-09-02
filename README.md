@@ -13,5 +13,5 @@ npm start
 
 ## Deployment URLs
 
-- **Client (frontend):** https://your-client-url.onrender.com  
-- **Server (backend):** https://your-server-url.onrender.com
+- **Client (frontend):** https://first-mern-stack.onrender.com
+- **Server (backend):** https://first-mern-stack.onrender.com
