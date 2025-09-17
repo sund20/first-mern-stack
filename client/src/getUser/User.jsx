@@ -20,26 +20,15 @@ const User = () => {
 
     fetchData();
   }, []);
-{/*
-  const deleteUser = async (userId) => {
-     const confirmDelete = window.confirm("Are you sure you want to delete this user?");
-  if (!confirmDelete) return;
-    try {
-        await axios.delete(`http://localhost:8000/api/delete/user/${userId}`);
-        toast.success("User deleted successfully", { position: 'top-center' });
-        setUsers(users.filter((user) => user._id !== userId));
-    } catch (error) {
-        console.error("Error deleting user:", error);
-        toast.error("Failed to delete user", { position: 'top-center' });
-    }
-  };*/}
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
   const deleteUser = async (userId) => {
   const confirmDelete = window.confirm("Are you sure you want to delete this user?");
   if (!confirmDelete) return;
 
   try {
-    await axios.delete(`http://localhost:8000/api/user/${userId}`); // ✅ correct route
+    await axios.delete(`${API_URL}/api/user/${userId}`); // ✅ correct route
     toast.success("User deleted successfully", { position: 'top-center' });
     setUsers(users.filter((user) => user._id !== userId));
   } catch (error) {

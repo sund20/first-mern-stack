@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 const DeleteUser = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
   useEffect(() => {
     const confirmAndDelete = async () => {
       const confirmed = window.confirm("Are you sure you want to delete this user?");
