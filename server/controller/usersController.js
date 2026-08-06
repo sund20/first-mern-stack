@@ -1,4 +1,5 @@
 import User from "../model/userModel.js";
+import mongoose from "mongoose"
 
 // Create a new user
 export const create = async (req, res) => {
@@ -99,17 +100,36 @@ export const deleteUser = async (req, res) => {
     }
 };
 */}
+
+// Improved deleteUser controller (replace or merge into your existing controller file)
+
+
 export const deleteUser = async (req, res) => {
-  try {
-    const user = await User.findByIdAndDelete(req.params.id);
-    console.log("try me");
-    if (!user) return res.status(404).json({ message: "User not found" });
-    console.log("2 log test")
-    res.status(200).json({ message: "User deleted" });
-  } catch (error) {
-    console.error("Delete Error:", error);
-    res.status(500).json({ message: "Server error" });
-  }
+    const id = req.params.id;
+    console.info(`DELETE /api/users/${id} - request received`);
+
+    // Validate ObjectId early to avoid unnecessary DB calls
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        console.warn(`DELETE /api/users/${id} - invalid id`);
+        return res.status(400).json({ message: "Invalid user id" });
+    }
+
+    try {
+        const deleted = await User.findByIdAndDelete(id);
+
+        if (!deleted) {
+            console.warn(`DELETE /api/users/${id} - user not found`);
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Optionally, you can return the deleted document for client confirmation
+        console.info(`DELETE /api/users/${id} - user deleted`, { id, email: deleted.email });
+        return res.status(200).json({ message: "User deleted", data: deleted });
+    } catch (error) {
+        // Include contextual info but avoid leaking sensitive details to clients
+        console.error(`DELETE /api/users/${id} - error:`, error);
+        return res.status(500).json({ message: "Server error" });
+    }
 };
 
 

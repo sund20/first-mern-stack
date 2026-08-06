@@ -21,3 +21,18 @@ Thumbs.db
 # IDE/editor settings
 .vscode/
 .idea/
+
+node_modu# Node
+node_modules/
+**/node_modules/
+
+# Environment
+.env
+server/.env
+client/.env
+
+# System
+.DS_Store
+
+# Build
+client/dist/
