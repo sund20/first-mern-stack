@@ -11,7 +11,23 @@ const PORT = process.env.PORT || 7000;
 const MONGO_URI = process.env.MONGO_URI; // Make sure this matches your .env key!
 
 app.use(express.json());
-app.use(cors());
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://get-users-app.vercel.app',
+  ...(process.env.CLIENT_URL?.split(',').map((url) => url.trim()) ?? []),
+].filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
 
 // API routes/
 app.use("/api", route);

@@ -5,13 +5,15 @@ import Table from 'react-bootstrap/Table';
 import toast from 'react-hot-toast';
 
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 const User = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/users');
+        const response = await axios.get(`${API_URL}/api/users`);
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -20,8 +22,6 @@ const User = () => {
 
     fetchData();
   }, []);
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
   const deleteUser = async (userId) => {
   const confirmDelete = window.confirm("Are you sure you want to delete this user?");
