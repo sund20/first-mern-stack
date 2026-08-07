@@ -7,7 +7,7 @@ import path from 'path';
 import route from './routes/user.Route.js';
 
 const app = express();
-const PORT = process.env.PORT || 7000;
+const PORT = process.env.PORT || 8000;
 const MONGO_URI = process.env.MONGO_URI; // Make sure this matches your .env key!
 
 app.use(express.json());
@@ -57,6 +57,6 @@ mongoose
   });
 
 // Basic route (for dev mode)
-//app.get('/', (req, res) => {
-  //res.send('Hello, Render!');
-//});
+app.get('/', (req, res) => {
+  res.send('Hello, Render!');
+});
