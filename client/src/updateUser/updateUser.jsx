@@ -24,7 +24,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/user/${id}`);
+        const response = await axios.get(`/api/users/${id}`);//${API_URL}/api/user/
         setUser(response.data);
       } catch (error) {
         console.error('Error fetching user:', error);

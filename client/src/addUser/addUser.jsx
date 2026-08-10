@@ -32,7 +32,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 }
 
     try {
-      const response = await axios.post (`${API_URL}/api/user/`, user);
+      const response = await axios.post ('/api/users', user);//`${API_URL}/api/user/`
       toast.success(response.data.message || "User added", { position: 'top-center' });
       setUser(initialUserState);
       navigate('/');

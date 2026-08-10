@@ -16,7 +16,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
       }
 
       try {
-        await axios.delete(`${API_URL}/api/user/${id}`);
+        await axios.delete(`/api/users/${id}`);//${API_URL}/api/user/
         toast.success("User deleted successfully", { position: 'top-center' });
       } catch (error) {
         console.error("Delete error:", error);
