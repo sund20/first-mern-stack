@@ -14,7 +14,10 @@ const User = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}/api/users`);
-        setUsers(response.data);
+        // Handle either response shape: a plain array, or { users: [...] }
+        const data = response.data;
+        const userList = Array.isArray(data) ? data : (data.users || data.data || []);
+        setUsers(userList);
       } catch (error) {
         console.error('Error fetching users:', error);
       }
